@@ -1,0 +1,188 @@
+# frozen_string_literal: true
+
+module Langfuse
+  class Error < StandardError
+    # @!parse
+    #   # @return [StandardError, nil]
+    #   attr_reader :cause
+  end
+
+  class ConversionError < Langfuse::Error
+  end
+
+  class APIError < Langfuse::Error
+    # @return [URI::Generic]
+    attr_reader :url
+
+    # @return [Integer, nil]
+    attr_reader :status
+
+    # @return [Object, nil]
+    attr_reader :body
+
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [Integer, nil]
+    # @param body [Object, nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
+    def initialize(url:, status: nil, body: nil, request: nil, response: nil, message: nil)
+      @url = url
+      @status = status
+      @body = body
+      @request = request
+      @response = response
+      super(message)
+    end
+  end
+
+  class APIConnectionError < Langfuse::APIError
+    # @!parse
+    #   # @return [nil]
+    #   attr_reader :status
+
+    # @!parse
+    #   # @return [nil]
+    #   attr_reader :body
+
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [nil]
+    # @param body [nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
+    def initialize(
+      url:,
+      status: nil,
+      body: nil,
+      request: nil,
+      response: nil,
+      message: "Connection error."
+    )
+      super
+    end
+  end
+
+  class APITimeoutError < Langfuse::APIConnectionError
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [nil]
+    # @param body [nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
+    def initialize(
+      url:,
+      status: nil,
+      body: nil,
+      request: nil,
+      response: nil,
+      message: "Request timed out."
+    )
+      super
+    end
+  end
+
+  class APIStatusError < Langfuse::APIError
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [Integer]
+    # @param body [Object, nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
+    # @return [Langfuse::APIStatusError]
+    #
+    def self.for(url:, status:, body:, request:, response:, message: nil)
+      kwargs = {url: url, status: status, body: body, request: request, response: response, message: message}
+
+      case status
+      in 400
+        Langfuse::BadRequestError.new(**kwargs)
+      in 401
+        Langfuse::AuthenticationError.new(**kwargs)
+      in 403
+        Langfuse::PermissionDeniedError.new(**kwargs)
+      in 404
+        Langfuse::NotFoundError.new(**kwargs)
+      in 409
+        Langfuse::ConflictError.new(**kwargs)
+      in 422
+        Langfuse::UnprocessableEntityError.new(**kwargs)
+      in 429
+        Langfuse::RateLimitError.new(**kwargs)
+      in (500..)
+        Langfuse::InternalServerError.new(**kwargs)
+      else
+        Langfuse::APIStatusError.new(**kwargs)
+      end
+    end
+
+    # @!parse
+    #   # @return [Integer]
+    #   attr_reader :status
+
+    # @private
+    #
+    # @param url [URI::Generic]
+    # @param status [Integer]
+    # @param body [Object, nil]
+    # @param request [nil]
+    # @param response [nil]
+    # @param message [String, nil]
+    #
+    def initialize(url:, status:, body:, request:, response:, message: nil)
+      message ||= {url: url.to_s, status: status, body: body}
+      super(
+        url: url,
+        status: status,
+        body: body,
+        request: request,
+        response: response,
+        message: message&.to_s
+      )
+    end
+  end
+
+  class BadRequestError < Langfuse::APIStatusError
+    HTTP_STATUS = 400
+  end
+
+  class AuthenticationError < Langfuse::APIStatusError
+    HTTP_STATUS = 401
+  end
+
+  class PermissionDeniedError < Langfuse::APIStatusError
+    HTTP_STATUS = 403
+  end
+
+  class NotFoundError < Langfuse::APIStatusError
+    HTTP_STATUS = 404
+  end
+
+  class ConflictError < Langfuse::APIStatusError
+    HTTP_STATUS = 409
+  end
+
+  class UnprocessableEntityError < Langfuse::APIStatusError
+    HTTP_STATUS = 422
+  end
+
+  class RateLimitError < Langfuse::APIStatusError
+    HTTP_STATUS = 429
+  end
+
+  class InternalServerError < Langfuse::APIStatusError
+    HTTP_STATUS = (500..)
+  end
+end

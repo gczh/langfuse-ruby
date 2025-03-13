@@ -1,0 +1,71 @@
+module Langfuse
+  module Models
+    module API
+      type optional_observation_body =
+        {
+          environment: String?,
+          input: top,
+          level: Langfuse::Models::API::Public::observation_level?,
+          metadata: top,
+          name: String?,
+          output: top,
+          parent_observation_id: String?,
+          start_time: Time?,
+          status_message: String?,
+          trace_id: String?,
+          version: String?
+        }
+
+      class OptionalObservationBody < Langfuse::BaseModel
+        attr_accessor environment: String?
+
+        attr_reader input: top?
+
+        def input=: (top) -> top
+
+        attr_accessor level: Langfuse::Models::API::Public::observation_level?
+
+        attr_reader metadata: top?
+
+        def metadata=: (top) -> top
+
+        attr_accessor name: String?
+
+        attr_reader output: top?
+
+        def output=: (top) -> top
+
+        attr_accessor parent_observation_id: String?
+
+        attr_accessor start_time: Time?
+
+        attr_accessor status_message: String?
+
+        attr_accessor trace_id: String?
+
+        attr_accessor version: String?
+
+        def initialize:
+          (
+            environment: String?,
+            input: top,
+            level: Langfuse::Models::API::Public::observation_level?,
+            metadata: top,
+            name: String?,
+            output: top,
+            parent_observation_id: String?,
+            start_time: Time?,
+            status_message: String?,
+            trace_id: String?,
+            version: String?
+          ) -> void
+          | (
+            ?Langfuse::Models::API::optional_observation_body
+            | Langfuse::BaseModel data
+          ) -> void
+
+        def to_hash: -> Langfuse::Models::API::optional_observation_body
+      end
+    end
+  end
+end

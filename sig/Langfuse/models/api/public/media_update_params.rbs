@@ -1,0 +1,44 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type media_update_params =
+          {
+            uploaded_at: Time,
+            upload_http_status: Integer,
+            upload_http_error: String?,
+            upload_time_ms: Integer?
+          }
+          & Langfuse::request_parameters
+
+        class MediaUpdateParams < Langfuse::BaseModel
+          extend Langfuse::RequestParameters::Converter
+          include Langfuse::RequestParameters
+
+          attr_accessor uploaded_at: Time
+
+          attr_accessor upload_http_status: Integer
+
+          attr_accessor upload_http_error: String?
+
+          attr_accessor upload_time_ms: Integer?
+
+          def initialize:
+            (
+              uploaded_at: Time,
+              upload_http_status: Integer,
+              upload_http_error: String?,
+              upload_time_ms: Integer?,
+              request_options: Langfuse::request_opts
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::media_update_params
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::media_update_params
+        end
+      end
+    end
+  end
+end

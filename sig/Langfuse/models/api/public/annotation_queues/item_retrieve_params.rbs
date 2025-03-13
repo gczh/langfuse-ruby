@@ -1,0 +1,31 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        module AnnotationQueues
+          type item_retrieve_params =
+            { queue_id: String } & Langfuse::request_parameters
+
+          class ItemRetrieveParams < Langfuse::BaseModel
+            extend Langfuse::RequestParameters::Converter
+            include Langfuse::RequestParameters
+
+            attr_accessor queue_id: String
+
+            def initialize:
+              (
+                queue_id: String,
+                request_options: Langfuse::request_opts
+              ) -> void
+              | (
+                ?Langfuse::Models::API::Public::AnnotationQueues::item_retrieve_params
+                | Langfuse::BaseModel data
+              ) -> void
+
+            def to_hash: -> Langfuse::Models::API::Public::AnnotationQueues::item_retrieve_params
+          end
+        end
+      end
+    end
+  end
+end

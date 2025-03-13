@@ -1,0 +1,41 @@
+module Langfuse
+  module Models
+    module API
+      type ingestion_usage =
+        Langfuse::Models::API::Public::Usage
+        | Langfuse::Models::API::IngestionUsage::OpenAIUsage
+
+      class IngestionUsage < Langfuse::Union
+        type openai_usage =
+          {
+            completion_tokens: Integer?,
+            prompt_tokens: Integer?,
+            total_tokens: Integer?
+          }
+
+        class OpenAIUsage < Langfuse::BaseModel
+          attr_accessor completion_tokens: Integer?
+
+          attr_accessor prompt_tokens: Integer?
+
+          attr_accessor total_tokens: Integer?
+
+          def initialize:
+            (
+              completion_tokens: Integer?,
+              prompt_tokens: Integer?,
+              total_tokens: Integer?
+            ) -> void
+            | (
+              ?Langfuse::Models::API::IngestionUsage::openai_usage
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::IngestionUsage::openai_usage
+        end
+
+        private def self.variants: -> [[nil, Langfuse::Models::API::Public::Usage], [nil, Langfuse::Models::API::IngestionUsage::OpenAIUsage]]
+      end
+    end
+  end
+end

@@ -1,0 +1,74 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type observation_list_params =
+          {
+            environment: ::Array[String?],
+            from_start_time: Time?,
+            limit: Integer?,
+            name: String?,
+            page: Integer?,
+            parent_observation_id: String?,
+            to_start_time: Time?,
+            trace_id: String?,
+            type: String?,
+            user_id: String?,
+            version: String?
+          }
+          & Langfuse::request_parameters
+
+        class ObservationListParams < Langfuse::BaseModel
+          extend Langfuse::RequestParameters::Converter
+          include Langfuse::RequestParameters
+
+          attr_reader environment: ::Array[String?]?
+
+          def environment=: (::Array[String?]) -> ::Array[String?]
+
+          attr_accessor from_start_time: Time?
+
+          attr_accessor limit: Integer?
+
+          attr_accessor name: String?
+
+          attr_accessor page: Integer?
+
+          attr_accessor parent_observation_id: String?
+
+          attr_accessor to_start_time: Time?
+
+          attr_accessor trace_id: String?
+
+          attr_accessor type: String?
+
+          attr_accessor user_id: String?
+
+          attr_accessor version: String?
+
+          def initialize:
+            (
+              environment: ::Array[String?],
+              from_start_time: Time?,
+              limit: Integer?,
+              name: String?,
+              page: Integer?,
+              parent_observation_id: String?,
+              to_start_time: Time?,
+              trace_id: String?,
+              type: String?,
+              user_id: String?,
+              version: String?,
+              request_options: Langfuse::request_opts
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::observation_list_params
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::observation_list_params
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,35 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        class AnnotationQueues
+          attr_reader items: Langfuse::Resources::API::Public::AnnotationQueues::Items
+
+          def retrieve:
+            (
+              String queue_id,
+              ?Langfuse::Models::API::Public::AnnotationQueueRetrieveParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::AnnotationQueue
+            | (
+              String queue_id,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::AnnotationQueue
+
+          def list:
+            (
+              ?Langfuse::Models::API::Public::AnnotationQueueListParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::AnnotationQueueListResponse
+            | (
+              limit: Integer?,
+              page: Integer?,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::AnnotationQueueListResponse
+
+          def initialize: (client: Langfuse::Client) -> void
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,33 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        module V2
+          type dataset_list_response =
+            {
+              data: ::Array[Langfuse::Models::API::Public::V2::Dataset],
+              meta: Langfuse::Models::API::Public::UtilsMetaResponse
+            }
+
+          class DatasetListResponse < Langfuse::BaseModel
+            attr_accessor data: ::Array[Langfuse::Models::API::Public::V2::Dataset]
+
+            attr_accessor meta: Langfuse::Models::API::Public::UtilsMetaResponse
+
+            def initialize:
+              (
+                data: ::Array[Langfuse::Models::API::Public::V2::Dataset],
+                meta: Langfuse::Models::API::Public::UtilsMetaResponse
+              ) -> void
+              | (
+                ?Langfuse::Models::API::Public::V2::dataset_list_response
+                | Langfuse::BaseModel data
+              ) -> void
+
+            def to_hash: -> Langfuse::Models::API::Public::V2::dataset_list_response
+          end
+        end
+      end
+    end
+  end
+end

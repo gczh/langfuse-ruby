@@ -1,0 +1,48 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        class ScoreConfigs
+          def create:
+            (
+              Langfuse::Models::API::Public::ScoreConfigCreateParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::ScoreConfig
+            | (
+              data_type: Langfuse::Models::API::Public::score_data_type,
+              name: String,
+              categories: ::Array[Langfuse::Models::API::Public::ConfigCategory]?,
+              description: String?,
+              max_value: Float?,
+              min_value: Float?,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::ScoreConfig
+
+          def retrieve:
+            (
+              String config_id,
+              ?Langfuse::Models::API::Public::ScoreConfigRetrieveParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::ScoreConfig
+            | (
+              String config_id,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::ScoreConfig
+
+          def list:
+            (
+              ?Langfuse::Models::API::Public::ScoreConfigListParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::ScoreConfigListResponse
+            | (
+              limit: Integer?,
+              page: Integer?,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::ScoreConfigListResponse
+
+          def initialize: (client: Langfuse::Client) -> void
+        end
+      end
+    end
+  end
+end

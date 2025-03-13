@@ -1,0 +1,80 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type trace =
+          {
+            id: String,
+            timestamp: Time,
+            environment: String?,
+            input: top,
+            metadata: top,
+            name: String?,
+            output: top,
+            public: bool?,
+            release: String?,
+            session_id: String?,
+            tags: ::Array[String]?,
+            user_id: String?,
+            version: String?
+          }
+
+        class Trace < Langfuse::BaseModel
+          attr_accessor id: String
+
+          attr_accessor timestamp: Time
+
+          attr_accessor environment: String?
+
+          attr_reader input: top?
+
+          def input=: (top) -> top
+
+          attr_reader metadata: top?
+
+          def metadata=: (top) -> top
+
+          attr_accessor name: String?
+
+          attr_reader output: top?
+
+          def output=: (top) -> top
+
+          attr_accessor public: bool?
+
+          attr_accessor release: String?
+
+          attr_accessor session_id: String?
+
+          attr_accessor tags: ::Array[String]?
+
+          attr_accessor user_id: String?
+
+          attr_accessor version: String?
+
+          def initialize:
+            (
+              id: String,
+              timestamp: Time,
+              environment: String?,
+              input: top,
+              metadata: top,
+              name: String?,
+              output: top,
+              public: bool?,
+              release: String?,
+              session_id: String?,
+              tags: ::Array[String]?,
+              user_id: String?,
+              version: String?
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::trace | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::trace
+        end
+      end
+    end
+  end
+end

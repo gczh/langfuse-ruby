@@ -1,0 +1,65 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type comment =
+          {
+            id: String,
+            content: String,
+            created_at: Time,
+            object_id_: String,
+            object_type: Langfuse::Models::API::Public::Comment::object_type,
+            project_id: String,
+            updated_at: Time,
+            author_user_id: String?
+          }
+
+        class Comment < Langfuse::BaseModel
+          attr_accessor id: String
+
+          attr_accessor content: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor object_id_: String
+
+          attr_accessor object_type: Langfuse::Models::API::Public::Comment::object_type
+
+          attr_accessor project_id: String
+
+          attr_accessor updated_at: Time
+
+          attr_accessor author_user_id: String?
+
+          def initialize:
+            (
+              id: String,
+              content: String,
+              created_at: Time,
+              object_id_: String,
+              object_type: Langfuse::Models::API::Public::Comment::object_type,
+              project_id: String,
+              updated_at: Time,
+              author_user_id: String?
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::comment | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::comment
+
+          type object_type = :TRACE | :OBSERVATION | :SESSION | :PROMPT
+
+          class ObjectType < Langfuse::Enum
+            TRACE: :TRACE
+            OBSERVATION: :OBSERVATION
+            SESSION: :SESSION
+            PROMPT: :PROMPT
+
+            def self.values: -> ::Array[Langfuse::Models::API::Public::Comment::object_type]
+          end
+        end
+      end
+    end
+  end
+end

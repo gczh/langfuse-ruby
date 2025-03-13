@@ -1,0 +1,42 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        class Observations
+          def retrieve:
+            (
+              String observation_id,
+              ?Langfuse::Models::API::Public::ObservationRetrieveParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::ObservationsView
+            | (
+              String observation_id,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::ObservationsView
+
+          def list:
+            (
+              ?Langfuse::Models::API::Public::ObservationListParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::ObservationListResponse
+            | (
+              environment: ::Array[String?],
+              from_start_time: Time?,
+              limit: Integer?,
+              name: String?,
+              page: Integer?,
+              parent_observation_id: String?,
+              to_start_time: Time?,
+              trace_id: String?,
+              type: String?,
+              user_id: String?,
+              version: String?,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::ObservationListResponse
+
+          def initialize: (client: Langfuse::Client) -> void
+        end
+      end
+    end
+  end
+end

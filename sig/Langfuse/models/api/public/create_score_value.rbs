@@ -1,0 +1,13 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type create_score_value = Float | String
+
+        class CreateScoreValue < Langfuse::Union
+          private def self.variants: -> [[nil, Float], [nil, String]]
+        end
+      end
+    end
+  end
+end

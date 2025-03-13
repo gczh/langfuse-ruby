@@ -1,0 +1,55 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        module V2
+          type dataset =
+            {
+              id: String,
+              created_at: Time,
+              name: String,
+              project_id: String,
+              updated_at: Time,
+              description: String?,
+              metadata: top
+            }
+
+          class Dataset < Langfuse::BaseModel
+            attr_accessor id: String
+
+            attr_accessor created_at: Time
+
+            attr_accessor name: String
+
+            attr_accessor project_id: String
+
+            attr_accessor updated_at: Time
+
+            attr_accessor description: String?
+
+            attr_reader metadata: top?
+
+            def metadata=: (top) -> top
+
+            def initialize:
+              (
+                id: String,
+                created_at: Time,
+                name: String,
+                project_id: String,
+                updated_at: Time,
+                description: String?,
+                metadata: top
+              ) -> void
+              | (
+                ?Langfuse::Models::API::Public::V2::dataset
+                | Langfuse::BaseModel data
+              ) -> void
+
+            def to_hash: -> Langfuse::Models::API::Public::V2::dataset
+          end
+        end
+      end
+    end
+  end
+end

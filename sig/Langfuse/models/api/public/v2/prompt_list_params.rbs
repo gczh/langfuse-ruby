@@ -1,0 +1,58 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        module V2
+          type prompt_list_params =
+            {
+              from_updated_at: Time?,
+              label: String?,
+              limit: Integer?,
+              name: String?,
+              page: Integer?,
+              tag: String?,
+              to_updated_at: Time?
+            }
+            & Langfuse::request_parameters
+
+          class PromptListParams < Langfuse::BaseModel
+            extend Langfuse::RequestParameters::Converter
+            include Langfuse::RequestParameters
+
+            attr_accessor from_updated_at: Time?
+
+            attr_accessor label: String?
+
+            attr_accessor limit: Integer?
+
+            attr_accessor name: String?
+
+            attr_accessor page: Integer?
+
+            attr_accessor tag: String?
+
+            attr_accessor to_updated_at: Time?
+
+            def initialize:
+              (
+                from_updated_at: Time?,
+                label: String?,
+                limit: Integer?,
+                name: String?,
+                page: Integer?,
+                tag: String?,
+                to_updated_at: Time?,
+                request_options: Langfuse::request_opts
+              ) -> void
+              | (
+                ?Langfuse::Models::API::Public::V2::prompt_list_params
+                | Langfuse::BaseModel data
+              ) -> void
+
+            def to_hash: -> Langfuse::Models::API::Public::V2::prompt_list_params
+          end
+        end
+      end
+    end
+  end
+end

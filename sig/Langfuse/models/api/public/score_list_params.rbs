@@ -1,0 +1,92 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type score_list_params =
+          {
+            config_id: String?,
+            data_type: Langfuse::Models::API::Public::score_data_type?,
+            environment: ::Array[String?],
+            from_timestamp: Time?,
+            limit: Integer?,
+            name: String?,
+            operator: String?,
+            page: Integer?,
+            queue_id: String?,
+            score_ids: String?,
+            source: Langfuse::Models::API::Public::score_source?,
+            to_timestamp: Time?,
+            trace_tags: ::Array[String?],
+            user_id: String?,
+            value: Float?
+          }
+          & Langfuse::request_parameters
+
+        class ScoreListParams < Langfuse::BaseModel
+          extend Langfuse::RequestParameters::Converter
+          include Langfuse::RequestParameters
+
+          attr_accessor config_id: String?
+
+          attr_accessor data_type: Langfuse::Models::API::Public::score_data_type?
+
+          attr_reader environment: ::Array[String?]?
+
+          def environment=: (::Array[String?]) -> ::Array[String?]
+
+          attr_accessor from_timestamp: Time?
+
+          attr_accessor limit: Integer?
+
+          attr_accessor name: String?
+
+          attr_accessor operator: String?
+
+          attr_accessor page: Integer?
+
+          attr_accessor queue_id: String?
+
+          attr_accessor score_ids: String?
+
+          attr_accessor source: Langfuse::Models::API::Public::score_source?
+
+          attr_accessor to_timestamp: Time?
+
+          attr_reader trace_tags: ::Array[String?]?
+
+          def trace_tags=: (::Array[String?]) -> ::Array[String?]
+
+          attr_accessor user_id: String?
+
+          attr_accessor value: Float?
+
+          def initialize:
+            (
+              config_id: String?,
+              data_type: Langfuse::Models::API::Public::score_data_type?,
+              environment: ::Array[String?],
+              from_timestamp: Time?,
+              limit: Integer?,
+              name: String?,
+              operator: String?,
+              page: Integer?,
+              queue_id: String?,
+              score_ids: String?,
+              source: Langfuse::Models::API::Public::score_source?,
+              to_timestamp: Time?,
+              trace_tags: ::Array[String?],
+              user_id: String?,
+              value: Float?,
+              request_options: Langfuse::request_opts
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::score_list_params
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::score_list_params
+        end
+      end
+    end
+  end
+end

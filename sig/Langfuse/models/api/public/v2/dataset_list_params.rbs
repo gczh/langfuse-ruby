@@ -1,0 +1,34 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        module V2
+          type dataset_list_params =
+            { limit: Integer?, page: Integer? } & Langfuse::request_parameters
+
+          class DatasetListParams < Langfuse::BaseModel
+            extend Langfuse::RequestParameters::Converter
+            include Langfuse::RequestParameters
+
+            attr_accessor limit: Integer?
+
+            attr_accessor page: Integer?
+
+            def initialize:
+              (
+                limit: Integer?,
+                page: Integer?,
+                request_options: Langfuse::request_opts
+              ) -> void
+              | (
+                ?Langfuse::Models::API::Public::V2::dataset_list_params
+                | Langfuse::BaseModel data
+              ) -> void
+
+            def to_hash: -> Langfuse::Models::API::Public::V2::dataset_list_params
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,72 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        class Scores
+          def create:
+            (
+              Langfuse::Models::API::Public::ScoreCreateParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::ScoreCreateResponse
+            | (
+              name: String,
+              trace_id: String,
+              value: Langfuse::Models::API::Public::create_score_value,
+              id: String?,
+              comment: String?,
+              config_id: String?,
+              data_type: Langfuse::Models::API::Public::score_data_type?,
+              environment: String?,
+              observation_id: String?,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::ScoreCreateResponse
+
+          def retrieve:
+            (
+              String score_id,
+              ?Langfuse::Models::API::Public::ScoreRetrieveParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::score
+            | (
+              String score_id,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::score
+
+          def list:
+            (
+              ?Langfuse::Models::API::Public::ScoreListParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::ScoreListResponse
+            | (
+              config_id: String?,
+              data_type: Langfuse::Models::API::Public::score_data_type?,
+              environment: ::Array[String?],
+              from_timestamp: Time?,
+              limit: Integer?,
+              name: String?,
+              operator: String?,
+              page: Integer?,
+              queue_id: String?,
+              score_ids: String?,
+              source: Langfuse::Models::API::Public::score_source?,
+              to_timestamp: Time?,
+              trace_tags: ::Array[String?],
+              user_id: String?,
+              value: Float?,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::ScoreListResponse
+
+          def delete:
+            (
+              String score_id,
+              ?Langfuse::Models::API::Public::ScoreDeleteParams
+              | ::Hash[Symbol, top] params
+            ) -> nil
+            | (String score_id, request_options: Langfuse::request_opts) -> nil
+
+          def initialize: (client: Langfuse::Client) -> void
+        end
+      end
+    end
+  end
+end

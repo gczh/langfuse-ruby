@@ -1,0 +1,19 @@
+module Langfuse
+  module Models
+    module API
+      type create_span_body = { end_time: Time? }
+
+      class CreateSpanBody < Langfuse::Models::API::CreateEventBody
+        attr_accessor end_time: Time?
+
+        def initialize:
+          (end_time: Time?) -> void
+          | (
+            ?Langfuse::Models::API::create_span_body | Langfuse::BaseModel data
+          ) -> void
+
+        def to_hash: -> Langfuse::Models::API::create_span_body
+      end
+    end
+  end
+end

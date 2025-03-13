@@ -1,0 +1,70 @@
+module Langfuse
+  module Models
+    module API
+      type public_batch_ingestion_response =
+        {
+          errors: ::Array[Langfuse::Models::API::PublicBatchIngestionResponse::Error],
+          successes: ::Array[Langfuse::Models::API::PublicBatchIngestionResponse::Success]
+        }
+
+      class PublicBatchIngestionResponse < Langfuse::BaseModel
+        attr_accessor errors: ::Array[Langfuse::Models::API::PublicBatchIngestionResponse::Error]
+
+        attr_accessor successes: ::Array[Langfuse::Models::API::PublicBatchIngestionResponse::Success]
+
+        def initialize:
+          (
+            errors: ::Array[Langfuse::Models::API::PublicBatchIngestionResponse::Error],
+            successes: ::Array[Langfuse::Models::API::PublicBatchIngestionResponse::Success]
+          ) -> void
+          | (
+            ?Langfuse::Models::API::public_batch_ingestion_response
+            | Langfuse::BaseModel data
+          ) -> void
+
+        def to_hash: -> Langfuse::Models::API::public_batch_ingestion_response
+
+        type error =
+          { id: String, status: Integer, error: top, message: String? }
+
+        class Error < Langfuse::BaseModel
+          attr_accessor id: String
+
+          attr_accessor status: Integer
+
+          attr_reader error: top?
+
+          def error=: (top) -> top
+
+          attr_accessor message: String?
+
+          def initialize:
+            (id: String, status: Integer, error: top, message: String?) -> void
+            | (
+              ?Langfuse::Models::API::PublicBatchIngestionResponse::error
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::PublicBatchIngestionResponse::error
+        end
+
+        type success = { id: String, status: Integer }
+
+        class Success < Langfuse::BaseModel
+          attr_accessor id: String
+
+          attr_accessor status: Integer
+
+          def initialize:
+            (id: String, status: Integer) -> void
+            | (
+              ?Langfuse::Models::API::PublicBatchIngestionResponse::success
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::PublicBatchIngestionResponse::success
+        end
+      end
+    end
+  end
+end

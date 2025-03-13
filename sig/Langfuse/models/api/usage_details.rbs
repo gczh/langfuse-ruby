@@ -1,0 +1,53 @@
+module Langfuse
+  module Models
+    module API
+      type usage_details =
+        ::Hash[Symbol, Integer]
+        | Langfuse::Models::API::UsageDetails::OpenAIUsageSchema
+
+      class UsageDetails < Langfuse::Union
+        type integer_map = ::Hash[Symbol, Integer]
+
+        IntegerMap: integer_map
+
+        type openai_usage_schema =
+          {
+            completion_tokens: Integer,
+            prompt_tokens: Integer,
+            total_tokens: Integer,
+            completion_tokens_details: ::Hash[Symbol, Integer]?,
+            prompt_tokens_details: ::Hash[Symbol, Integer]?
+          }
+
+        class OpenAIUsageSchema < Langfuse::BaseModel
+          attr_accessor completion_tokens: Integer
+
+          attr_accessor prompt_tokens: Integer
+
+          attr_accessor total_tokens: Integer
+
+          attr_accessor completion_tokens_details: ::Hash[Symbol, Integer]?
+
+          attr_accessor prompt_tokens_details: ::Hash[Symbol, Integer]?
+
+          def initialize:
+            (
+              completion_tokens: Integer,
+              prompt_tokens: Integer,
+              total_tokens: Integer,
+              completion_tokens_details: ::Hash[Symbol, Integer]?,
+              prompt_tokens_details: ::Hash[Symbol, Integer]?
+            ) -> void
+            | (
+              ?Langfuse::Models::API::UsageDetails::openai_usage_schema
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::UsageDetails::openai_usage_schema
+        end
+
+        private def self.variants: -> [[nil, ::Hash[Symbol, Integer]], [nil, Langfuse::Models::API::UsageDetails::OpenAIUsageSchema]]
+      end
+    end
+  end
+end

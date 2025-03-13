@@ -1,0 +1,79 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        attr_reader annotation_queues: Langfuse::Resources::API::Public::AnnotationQueues
+
+        attr_reader comments: Langfuse::Resources::API::Public::Comments
+
+        attr_reader dataset_items: Langfuse::Resources::API::Public::DatasetItems
+
+        attr_reader v2: Langfuse::Resources::API::Public::V2
+
+        attr_reader datasets: Langfuse::Resources::API::Public::Datasets
+
+        attr_reader media: Langfuse::Resources::API::Public::Media
+
+        attr_reader metrics: Langfuse::Resources::API::Public::Metrics
+
+        attr_reader models: Langfuse::Resources::API::Public::Models
+
+        attr_reader observations: Langfuse::Resources::API::Public::Observations
+
+        attr_reader score_configs: Langfuse::Resources::API::Public::ScoreConfigs
+
+        attr_reader scores: Langfuse::Resources::API::Public::Scores
+
+        attr_reader sessions: Langfuse::Resources::API::Public::Sessions
+
+        attr_reader traces: Langfuse::Resources::API::Public::Traces
+
+        def batch_ingestion:
+          (
+            Langfuse::Models::API::PublicBatchIngestionParams
+            | ::Hash[Symbol, top] params
+          ) -> Langfuse::Models::API::PublicBatchIngestionResponse
+          | (
+            batch: ::Array[Langfuse::Models::API::PublicBatchIngestionParams::batch],
+            metadata: top,
+            request_options: Langfuse::request_opts
+          ) -> Langfuse::Models::API::PublicBatchIngestionResponse
+
+        def check_health:
+          (
+            ?Langfuse::Models::API::PublicCheckHealthParams
+            | ::Hash[Symbol, top] params
+          ) -> Langfuse::Models::API::PublicCheckHealthResponse
+          | (
+            request_options: Langfuse::request_opts
+          ) -> Langfuse::Models::API::PublicCheckHealthResponse
+
+        def create_dataset_run_item:
+          (
+            Langfuse::Models::API::PublicCreateDatasetRunItemParams
+            | ::Hash[Symbol, top] params
+          ) -> Langfuse::Models::API::DatasetRunItem
+          | (
+            dataset_item_id: String,
+            run_name: String,
+            metadata: top,
+            observation_id: String?,
+            run_description: String?,
+            trace_id: String?,
+            request_options: Langfuse::request_opts
+          ) -> Langfuse::Models::API::DatasetRunItem
+
+        def retrieve_projects:
+          (
+            ?Langfuse::Models::API::PublicRetrieveProjectsParams
+            | ::Hash[Symbol, top] params
+          ) -> Langfuse::Models::API::PublicRetrieveProjectsResponse
+          | (
+            request_options: Langfuse::request_opts
+          ) -> Langfuse::Models::API::PublicRetrieveProjectsResponse
+
+        def initialize: (client: Langfuse::Client) -> void
+      end
+    end
+  end
+end

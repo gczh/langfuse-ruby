@@ -1,0 +1,42 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        module AnnotationQueues
+          type item_create_params =
+            {
+              object_id_: String,
+              object_type: Langfuse::Models::API::Public::AnnotationQueues::annotation_queue_object_type,
+              status: Langfuse::Models::API::Public::AnnotationQueues::annotation_queue_status?
+            }
+            & Langfuse::request_parameters
+
+          class ItemCreateParams < Langfuse::BaseModel
+            extend Langfuse::RequestParameters::Converter
+            include Langfuse::RequestParameters
+
+            attr_accessor object_id_: String
+
+            attr_accessor object_type: Langfuse::Models::API::Public::AnnotationQueues::annotation_queue_object_type
+
+            attr_accessor status: Langfuse::Models::API::Public::AnnotationQueues::annotation_queue_status?
+
+            def initialize:
+              (
+                object_id_: String,
+                object_type: Langfuse::Models::API::Public::AnnotationQueues::annotation_queue_object_type,
+                status: Langfuse::Models::API::Public::AnnotationQueues::annotation_queue_status?,
+                request_options: Langfuse::request_opts
+              ) -> void
+              | (
+                ?Langfuse::Models::API::Public::AnnotationQueues::item_create_params
+                | Langfuse::BaseModel data
+              ) -> void
+
+            def to_hash: -> Langfuse::Models::API::Public::AnnotationQueues::item_create_params
+          end
+        end
+      end
+    end
+  end
+end

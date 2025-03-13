@@ -1,0 +1,73 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type dataset_item =
+          {
+            id: String,
+            created_at: Time,
+            dataset_id: String,
+            dataset_name: String,
+            status: Langfuse::Models::API::Public::dataset_status,
+            updated_at: Time,
+            expected_output: top,
+            input: top,
+            metadata: top,
+            source_observation_id: String?,
+            source_trace_id: String?
+          }
+
+        class DatasetItem < Langfuse::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor dataset_id: String
+
+          attr_accessor dataset_name: String
+
+          attr_accessor status: Langfuse::Models::API::Public::dataset_status
+
+          attr_accessor updated_at: Time
+
+          attr_reader expected_output: top?
+
+          def expected_output=: (top) -> top
+
+          attr_reader input: top?
+
+          def input=: (top) -> top
+
+          attr_reader metadata: top?
+
+          def metadata=: (top) -> top
+
+          attr_accessor source_observation_id: String?
+
+          attr_accessor source_trace_id: String?
+
+          def initialize:
+            (
+              id: String,
+              created_at: Time,
+              dataset_id: String,
+              dataset_name: String,
+              status: Langfuse::Models::API::Public::dataset_status,
+              updated_at: Time,
+              expected_output: top,
+              input: top,
+              metadata: top,
+              source_observation_id: String?,
+              source_trace_id: String?
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::dataset_item
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::dataset_item
+        end
+      end
+    end
+  end
+end

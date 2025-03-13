@@ -1,0 +1,24 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type categorical_score = { string_value: String, value: Float? }
+
+        class CategoricalScore < Langfuse::Models::API::Public::BaseScore
+          attr_accessor string_value: String
+
+          attr_accessor value: Float?
+
+          def initialize:
+            (string_value: String, value: Float?) -> void
+            | (
+              ?Langfuse::Models::API::Public::categorical_score
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::categorical_score
+        end
+      end
+    end
+  end
+end

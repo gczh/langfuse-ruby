@@ -1,0 +1,35 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        module V2
+          type prompt_update_labels_params =
+            { name: String, new_labels: ::Array[String] }
+            & Langfuse::request_parameters
+
+          class PromptUpdateLabelsParams < Langfuse::BaseModel
+            extend Langfuse::RequestParameters::Converter
+            include Langfuse::RequestParameters
+
+            attr_accessor name: String
+
+            attr_accessor new_labels: ::Array[String]
+
+            def initialize:
+              (
+                name: String,
+                new_labels: ::Array[String],
+                request_options: Langfuse::request_opts
+              ) -> void
+              | (
+                ?Langfuse::Models::API::Public::V2::prompt_update_labels_params
+                | Langfuse::BaseModel data
+              ) -> void
+
+            def to_hash: -> Langfuse::Models::API::Public::V2::prompt_update_labels_params
+          end
+        end
+      end
+    end
+  end
+end

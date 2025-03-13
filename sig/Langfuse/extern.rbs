@@ -1,0 +1,4 @@
+module Langfuse
+  module Extern
+  end
+end

@@ -1,0 +1,48 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type dataset_item_list_params =
+          {
+            dataset_name: String?,
+            limit: Integer?,
+            page: Integer?,
+            source_observation_id: String?,
+            source_trace_id: String?
+          }
+          & Langfuse::request_parameters
+
+        class DatasetItemListParams < Langfuse::BaseModel
+          extend Langfuse::RequestParameters::Converter
+          include Langfuse::RequestParameters
+
+          attr_accessor dataset_name: String?
+
+          attr_accessor limit: Integer?
+
+          attr_accessor page: Integer?
+
+          attr_accessor source_observation_id: String?
+
+          attr_accessor source_trace_id: String?
+
+          def initialize:
+            (
+              dataset_name: String?,
+              limit: Integer?,
+              page: Integer?,
+              source_observation_id: String?,
+              source_trace_id: String?,
+              request_options: Langfuse::request_opts
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::dataset_item_list_params
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::dataset_item_list_params
+        end
+      end
+    end
+  end
+end

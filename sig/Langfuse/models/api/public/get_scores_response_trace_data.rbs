@@ -1,0 +1,31 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type get_scores_response_trace_data =
+          { environment: String?, tags: ::Array[String]?, user_id: String? }
+
+        class GetScoresResponseTraceData < Langfuse::BaseModel
+          attr_accessor environment: String?
+
+          attr_accessor tags: ::Array[String]?
+
+          attr_accessor user_id: String?
+
+          def initialize:
+            (
+              environment: String?,
+              tags: ::Array[String]?,
+              user_id: String?
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::get_scores_response_trace_data
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::get_scores_response_trace_data
+        end
+      end
+    end
+  end
+end

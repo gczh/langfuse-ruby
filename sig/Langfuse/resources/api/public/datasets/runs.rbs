@@ -1,0 +1,50 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        class Datasets
+          class Runs
+            def retrieve:
+              (
+                String run_name,
+                Langfuse::Models::API::Public::Datasets::RunRetrieveParams
+                | ::Hash[Symbol, top] params
+              ) -> Langfuse::Models::API::Public::Datasets::RunRetrieveResponse
+              | (
+                String run_name,
+                dataset_name: String,
+                request_options: Langfuse::request_opts
+              ) -> Langfuse::Models::API::Public::Datasets::RunRetrieveResponse
+
+            def list:
+              (
+                String dataset_name,
+                ?Langfuse::Models::API::Public::Datasets::RunListParams
+                | ::Hash[Symbol, top] params
+              ) -> Langfuse::Models::API::Public::Datasets::RunListResponse
+              | (
+                String dataset_name,
+                limit: Integer?,
+                page: Integer?,
+                request_options: Langfuse::request_opts
+              ) -> Langfuse::Models::API::Public::Datasets::RunListResponse
+
+            def delete:
+              (
+                String run_name,
+                Langfuse::Models::API::Public::Datasets::RunDeleteParams
+                | ::Hash[Symbol, top] params
+              ) -> Langfuse::Models::API::Public::Datasets::RunDeleteResponse
+              | (
+                String run_name,
+                dataset_name: String,
+                request_options: Langfuse::request_opts
+              ) -> Langfuse::Models::API::Public::Datasets::RunDeleteResponse
+
+            def initialize: (client: Langfuse::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

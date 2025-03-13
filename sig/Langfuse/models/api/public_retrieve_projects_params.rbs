@@ -1,0 +1,21 @@
+module Langfuse
+  module Models
+    module API
+      type public_retrieve_projects_params = {  } & Langfuse::request_parameters
+
+      class PublicRetrieveProjectsParams < Langfuse::BaseModel
+        extend Langfuse::RequestParameters::Converter
+        include Langfuse::RequestParameters
+
+        def initialize:
+          (request_options: Langfuse::request_opts) -> void
+          | (
+            ?Langfuse::Models::API::public_retrieve_projects_params
+            | Langfuse::BaseModel data
+          ) -> void
+
+        def to_hash: -> Langfuse::Models::API::public_retrieve_projects_params
+      end
+    end
+  end
+end

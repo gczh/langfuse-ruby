@@ -1,0 +1,47 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        class V2
+          class Datasets
+            def create:
+              (
+                Langfuse::Models::API::Public::V2::DatasetCreateParams
+                | ::Hash[Symbol, top] params
+              ) -> Langfuse::Models::API::Public::V2::Dataset
+              | (
+                name: String,
+                description: String?,
+                metadata: top,
+                request_options: Langfuse::request_opts
+              ) -> Langfuse::Models::API::Public::V2::Dataset
+
+            def retrieve:
+              (
+                String dataset_name,
+                ?Langfuse::Models::API::Public::V2::DatasetRetrieveParams
+                | ::Hash[Symbol, top] params
+              ) -> Langfuse::Models::API::Public::V2::Dataset
+              | (
+                String dataset_name,
+                request_options: Langfuse::request_opts
+              ) -> Langfuse::Models::API::Public::V2::Dataset
+
+            def list:
+              (
+                ?Langfuse::Models::API::Public::V2::DatasetListParams
+                | ::Hash[Symbol, top] params
+              ) -> Langfuse::Models::API::Public::V2::DatasetListResponse
+              | (
+                limit: Integer?,
+                page: Integer?,
+                request_options: Langfuse::request_opts
+              ) -> Langfuse::Models::API::Public::V2::DatasetListResponse
+
+            def initialize: (client: Langfuse::Client) -> void
+          end
+        end
+      end
+    end
+  end
+end

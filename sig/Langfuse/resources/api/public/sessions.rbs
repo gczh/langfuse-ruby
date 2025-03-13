@@ -1,0 +1,36 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        class Sessions
+          def retrieve:
+            (
+              String session_id,
+              ?Langfuse::Models::API::Public::SessionRetrieveParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::SessionRetrieveResponse
+            | (
+              String session_id,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::SessionRetrieveResponse
+
+          def list:
+            (
+              ?Langfuse::Models::API::Public::SessionListParams
+              | ::Hash[Symbol, top] params
+            ) -> Langfuse::Models::API::Public::SessionListResponse
+            | (
+              environment: ::Array[String?],
+              from_timestamp: Time?,
+              limit: Integer?,
+              page: Integer?,
+              to_timestamp: Time?,
+              request_options: Langfuse::request_opts
+            ) -> Langfuse::Models::API::Public::SessionListResponse
+
+          def initialize: (client: Langfuse::Client) -> void
+        end
+      end
+    end
+  end
+end

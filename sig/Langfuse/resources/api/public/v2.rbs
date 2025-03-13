@@ -1,0 +1,15 @@
+module Langfuse
+  module Resources
+    class API
+      class Public
+        class V2
+          attr_reader datasets: Langfuse::Resources::API::Public::V2::Datasets
+
+          attr_reader prompts: Langfuse::Resources::API::Public::V2::Prompts
+
+          def initialize: (client: Langfuse::Client) -> void
+        end
+      end
+    end
+  end
+end

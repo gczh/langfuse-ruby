@@ -1,0 +1,50 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type usage =
+          {
+            input: Integer?,
+            input_cost: Float?,
+            output: Integer?,
+            output_cost: Float?,
+            total: Integer?,
+            total_cost: Float?,
+            unit: Langfuse::Models::API::Public::model_usage_unit?
+          }
+
+        class Usage < Langfuse::BaseModel
+          attr_accessor input: Integer?
+
+          attr_accessor input_cost: Float?
+
+          attr_accessor output: Integer?
+
+          attr_accessor output_cost: Float?
+
+          attr_accessor total: Integer?
+
+          attr_accessor total_cost: Float?
+
+          attr_accessor unit: Langfuse::Models::API::Public::model_usage_unit?
+
+          def initialize:
+            (
+              input: Integer?,
+              input_cost: Float?,
+              output: Integer?,
+              output_cost: Float?,
+              total: Integer?,
+              total_cost: Float?,
+              unit: Langfuse::Models::API::Public::model_usage_unit?
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::usage | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::usage
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,50 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        type session_list_params =
+          {
+            environment: ::Array[String?],
+            from_timestamp: Time?,
+            limit: Integer?,
+            page: Integer?,
+            to_timestamp: Time?
+          }
+          & Langfuse::request_parameters
+
+        class SessionListParams < Langfuse::BaseModel
+          extend Langfuse::RequestParameters::Converter
+          include Langfuse::RequestParameters
+
+          attr_reader environment: ::Array[String?]?
+
+          def environment=: (::Array[String?]) -> ::Array[String?]
+
+          attr_accessor from_timestamp: Time?
+
+          attr_accessor limit: Integer?
+
+          attr_accessor page: Integer?
+
+          attr_accessor to_timestamp: Time?
+
+          def initialize:
+            (
+              environment: ::Array[String?],
+              from_timestamp: Time?,
+              limit: Integer?,
+              page: Integer?,
+              to_timestamp: Time?,
+              request_options: Langfuse::request_opts
+            ) -> void
+            | (
+              ?Langfuse::Models::API::Public::session_list_params
+              | Langfuse::BaseModel data
+            ) -> void
+
+          def to_hash: -> Langfuse::Models::API::Public::session_list_params
+        end
+      end
+    end
+  end
+end

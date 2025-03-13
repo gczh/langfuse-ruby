@@ -1,0 +1,73 @@
+module Langfuse
+  module Models
+    module API
+      module Public
+        module V2
+          type prompt_list_response =
+            {
+              data: ::Array[Langfuse::Models::API::Public::V2::PromptListResponse::Data],
+              meta: Langfuse::Models::API::Public::UtilsMetaResponse
+            }
+
+          class PromptListResponse < Langfuse::BaseModel
+            attr_accessor data: ::Array[Langfuse::Models::API::Public::V2::PromptListResponse::Data]
+
+            attr_accessor meta: Langfuse::Models::API::Public::UtilsMetaResponse
+
+            def initialize:
+              (
+                data: ::Array[Langfuse::Models::API::Public::V2::PromptListResponse::Data],
+                meta: Langfuse::Models::API::Public::UtilsMetaResponse
+              ) -> void
+              | (
+                ?Langfuse::Models::API::Public::V2::prompt_list_response
+                | Langfuse::BaseModel data
+              ) -> void
+
+            def to_hash: -> Langfuse::Models::API::Public::V2::prompt_list_response
+
+            type data =
+              {
+                labels: ::Array[String],
+                last_config: top,
+                last_updated_at: Time,
+                name: String,
+                tags: ::Array[String],
+                versions: ::Array[Integer]
+              }
+
+            class Data < Langfuse::BaseModel
+              attr_accessor labels: ::Array[String]
+
+              attr_accessor last_config: top
+
+              attr_accessor last_updated_at: Time
+
+              attr_accessor name: String
+
+              attr_accessor tags: ::Array[String]
+
+              attr_accessor versions: ::Array[Integer]
+
+              def initialize:
+                (
+                  labels: ::Array[String],
+                  last_config: top,
+                  last_updated_at: Time,
+                  name: String,
+                  tags: ::Array[String],
+                  versions: ::Array[Integer]
+                ) -> void
+                | (
+                  ?Langfuse::Models::API::Public::V2::PromptListResponse::data
+                  | Langfuse::BaseModel data
+                ) -> void
+
+              def to_hash: -> Langfuse::Models::API::Public::V2::PromptListResponse::data
+            end
+          end
+        end
+      end
+    end
+  end
+end
