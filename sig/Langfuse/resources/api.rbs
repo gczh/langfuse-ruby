@@ -1,9 +1,0 @@
-module Langfuse
-  module Resources
-    class API
-      attr_reader public: Langfuse::Resources::API::Public
-
-      def initialize: (client: Langfuse::Client) -> void
-    end
-  end
-end
